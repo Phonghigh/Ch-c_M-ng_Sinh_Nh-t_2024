@@ -18,16 +18,19 @@
 <div id="birthday-message">Chúc mừng sinh nhật chị Trúc ngheeeeee </div>
 
 <script>
-    function playBirthdayMusic() {
-        var audio = document.getElementById('happy-birthday');
-        audio.currentTime = 0;
-        audio.play();
-    }
+    // Gọi hàm khi người dùng tương tác
+document.addEventListener("click", function() {
+    playBirthdayMusic();
+    // Xóa sự kiện click sau khi đã tương tác để tránh phát lại nhạc nếu người dùng click lại
+    document.removeEventListener("click", arguments.callee);
+});
 
-    // Gọi hàm khi trang được tải
-    window.onload = function() {
-        playBirthdayMusic();
-    };
+function playBirthdayMusic() {
+    var audio = document.getElementById('happy-birthday');
+    audio.currentTime = 0;
+    audio.play();
+}
+
     // Tạo hiệu ứng pháo hoa
     
 
