@@ -15,19 +15,32 @@
 <div id="text-3">3</div>
 <div id="text-4">2</div>
 <div id="text-5">1</div>
-<div id="birthday-message">Chúc mừng sinh nhật chị Vi nghe ngheeeeee </div>
+<div id="birthday-message">Chúc mừng sinh nhật chị Vi nghe ngheeeeee</div>
+<button id="play-button" style="display: none;">Nhấn để phát nhạc</button>
 
 <script>
-document.addEventListener("click", function() {
+document.addEventListener("DOMContentLoaded", function() {
     playBirthdayMusic();
-    document.removeEventListener("click", arguments.callee);
 });
 
 function playBirthdayMusic() {
     var audio = document.getElementById('happy-birthday');
     audio.currentTime = 0;
-    audio.play().catch(function(error) {
+    audio.play().then(() => {
+        console.log('Phát nhạc thành công');
+    }).catch(function(error) {
         console.log('Phát nhạc thất bại: ', error);
+        var playButton = document.getElementById('play-button');
+        playButton.style.display = 'block';
+        playButton.addEventListener('click', function() {
+            audio.play();
+            playButton.style.display = 'none';
+        });
+    });
+
+    // Xử lý sự kiện canplaythrough để chắc chắn rằng âm thanh đã được tải
+    audio.addEventListener('canplaythrough', function() {
+        console.log('Âm thanh đã sẵn sàng để phát');
     });
 }
 
